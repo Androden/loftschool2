@@ -1,3 +1,81 @@
-html, body{
- 
+/*Пременные в SASS*/
+$title-font: normal 24px/1.5 'Open Sans', sans-serif;
+$color-title: #F44336;
+.title {
+  font: $title-font;
+  color: $color-title;
+}
+
+/*Примеси (миксины)*/
+@mixin circle($width, $color) {
+  width: $width;
+  height: $width;
+  -webkit-border-radius: $width/2;
+  -moz-border-radius: $width/2;
+  -o-border-radius: $width/2;
+  -ms-border-radius: $width/2;
+  border-radius: $width/2;
+  background-color: $color;
+}
+.class {
+  @include circle(20px, rgb(0,0,255));
+}
+
+/*Extend*/
+.header-side {
+  width: 50%;
+  box-sizing: border-box;
+  color: #ffffff;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  padding: 12px 40px;
+}
+.header__left-side {
+  @extend .header-side;
+  float: left;
+}
+.header__right-side{
+  @extend .header-side;
+  float: right;
+  text-align: right;
+}
+
+/*Вложения*/
+.socials {
+  float: right;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  &__item {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-left: 8px;
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    font-size: 16px;
+    color: #444;
+  }
+}
+
+/*Арифметические операции*/
+$width: 100%;
+.container {
+  width: $width;
+}
+.column-half {
+  width: $width / 2;
+}
+.column-fifth {
+  width: $width / 5;
+}
+/*Функции*/
+$awesome-blue: #2196F3;
+a {
+  padding: 10 15px;
+  background-color: $awesome-blue;
+}
+a:hover {
+  background-color: darken($awesome-blue,10%);
 }

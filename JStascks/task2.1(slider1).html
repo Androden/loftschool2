@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Задача №9 со слайдером</title>
+   <style>
+      body {
+         font: 16px Helvetica, sans-serif;
+         margin: 0;
+         padding: 0;
+      }
+
+      a,
+      a:visited,
+      a:active,
+      a:focus {
+         color: #0091d9;
+         text-decoration: none;
+      }
+
+      a:hover,
+      a:active,
+      a:focus {
+         color: #ff6163;
+      }
+
+      .slider-container {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-top: 50px;
+      }
+
+      .arrow {
+         font-size: 30px;
+      }
+
+      .slider {
+         display: flex;
+         width: 300px;
+         overflow: hidden;
+         margin: 0 10px;
+      }
+
+      .items {
+         display: flex;
+         position: relative;
+         color: #444;
+         font-size: 30px;
+      }
+
+      .item {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: papayawhip;
+         box-sizing: border-box;
+         width: 100px;
+         height: 100px;
+         border: 1px solid #444;
+      }
+
+      .item ~ .item {
+         border-left: none;
+      }
+
+   </style>
+</head>
+<body>
+<div class="slider-container">
+   <a class="arrow" id="left" href="#">←</a>
+   <div class="slider">
+      <div class="items" id="items">
+         <div class="item">1</div>
+         <div class="item">2</div>
+         <div class="item">3</div>
+         <div class="item">4</div>
+         <div class="item">5</div>
+         <div class="item">6</div>
+         <div class="item">7</div>
+         <div class="item">8</div>
+      </div>
+   </div>
+   <a class="arrow" id="right" href="#">→</a>
+</div>
+
+<script>
+    const left = document.querySelector("#left");
+    const right = document.querySelector("#right");
+    const items = document.querySelector("#items");
+    const computed = getComputedStyle(items); // Возвращает все стили элемента
+    console.log(computed);
+
+
+    right.addEventListener("click", function(e) {
+        e.preventDefault();
+        let currentRight = parseInt(computed.right); // Принимает на входе строку, а возвращает только числовую часть
+        console.log(currentRight);
+
+        if (!currentRight) { // Прооверка вернулось ли число (может быть значение auto)
+            currentRight = 0;
+        }
+
+        if (currentRight < 500) { // Максимальное количество пикселей
+            items.style.right = currentRight + 100 + "px"; // 100px
+        }else{
+            items.style.right = '0px';
+        }
+    });
+
+    left.addEventListener("click", function(e) {
+        e.preventDefault();
+        let currentRight = parseInt(computed.right);
+
+        if (!currentRight) { // Прооверка вернулось ли число (может быть значение auto)
+            currentRight = 0;
+        }
+
+        if (currentRight > 0) {
+            items.style.right = currentRight - 100 + "px";
+        }else{
+            items.style.right = '500px';
+        }
+    });
+</script>
+</body>
+</html>

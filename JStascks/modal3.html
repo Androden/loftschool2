@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Модальное окно 3. С закрытие по клику на пустой области</title>
+   <style>
+      .overlay {
+         position: fixed;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background: #0005;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         z-index: 10000;
+      }
+
+      .container {
+         position: relative;
+      }
+
+      .content {
+         width: 400px;
+         background: #444;
+         border-radius: 5px;
+         padding: 10px;
+         color: #fff;
+         font: 16px Helvetica, sans-serif;
+         margin: 0;
+      }
+
+      .close {
+         font: 16px Helvetica, sans-serif;
+         color: #fff;
+         position: absolute;
+         right: -5px;
+         top: -10px;
+         background: #d00;
+         border-radius: 50%;
+         width: 20px;
+         height: 20px;
+         line-height: 20px;
+         text-align: center;
+         text-decoration: none;
+      }
+
+   </style>
+</head>
+<body>
+<div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem magnam ratione quasi alias adipisci molestias doloribus, provident eum natus rerum, numquam delectus cum at nobis consectetur deserunt perspiciatis eveniet temporibus.</div>
+
+<button class="openOverlay">открыть</button>
+
+<script type="template" id="overlayTemplate">
+   <div class="overlay">
+      <div class="container">
+         <a class="close" href="#">x</a>
+         <div class="content"></div>
+      </div>
+   </div>
+</script>
+
+<script>
+    const openButton = document.querySelector(".openOverlay");
+    const template = document.querySelector("#overlayTemplate").innerHTML; // Создаем переменную, куда добавляем разметку из шаблона
+    const overlay = createOverlay(template);  // Вызываем функцию
+
+    openButton.addEventListener("click", function() {
+        overlay.open(); // Метод открытия всплывающего окна
+        overlay.setContent("Спасибо, данные сохранены"); // Создаем элемент (в данном случае добавляетя контент)
+    });
+
+    function createOverlay(template) {
+        let fragment = document.createElement('div'); // Создаем элемент
+
+        fragment.innerHTML = template; // Добавляем элементу разметку из шаблона
+
+        const overlayElement = fragment.querySelector(".overlay");
+        const contentElement = fragment.querySelector(".content");
+        const closeElement = fragment.querySelector(".close");
+
+        fragment = null;
+
+        overlayElement.addEventListener("click", e => {
+            if (e.target === overlayElement) {
+                closeElement.click();
+            }
+        });
+        closeElement.addEventListener("click", () => {
+            document.body.removeChild(overlayElement);
+        });
+
+        return {
+            open() {
+                document.body.appendChild(overlayElement);
+            },
+            close() {
+                closeElement.click();
+            },
+            setContent(content) {
+                contentElement.innerHTML = content;
+            }
+        };
+    }
+
+</script>
+</body>
+</html>

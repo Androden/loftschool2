@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Основы JavaScript#1</title>
+</head>
+<body>
+
+
+<script>
+    var n = parseInt("3.14"); // 3
+    var n = parseFloat("3.14") // 3.14
+    var n = 5;
+    var m = n.toString();
+    var m = n+'';
+    var m = new String(n); // object
+
+    //console.log(typeof m);
+
+   //Математические функции
+   //Синус угла в 30 градусов
+    var a = 30;
+    var b = Math.sin(a * 180 / Math.PI);
+    console.log(b);
+
+    // корень пятой степени числа
+    var c = 30;
+    var d = Math.pow(c, 1 / 5);
+    console.log(d);
+
+    // логические операторы
+    var e = 15;
+    var f = !!e; //вернет true
+   console.log(f);
+
+   // тернарный оператор
+    g=5;
+    h=6;
+    //(g > h) ? alert(“Maximum g!”) : alert(“Maximum n!”);
+
+   //циклы
+    var k;
+    for (i = 0; i < 7; i++) {
+        k+=k;
+        console.log(k);
+    }
+   // Функции
+    var myAlert = function(name) {
+        alert("Hello " + name);
+    }
+    function helloMike(myFunc) {
+// тут функция передаётся как параметр
+        myFunc("Mike");
+    }
+    helloMike(myAlert);
+
+    // Область видимости функции — ЗАМЫКАНИЕ var
+
+    var someVar = 20;
+    var someOtherVar = 30;
+      
+    function sum (l, m) {
+        var result = l + m + someVar + someOtherVar;
+        return result;
+      }
+
+    var result = sum(10, 2);
+    console.log(result);
+
+    // Псплыите — var поднимаются на верх
+   if (10 > 100){
+       var p = 50;
+   }
+   console.log(p);
+
+
+
+</script>
+</body>
+</html>

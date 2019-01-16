@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Задачи по JavaScript#2. Dom-дерево</title>
+   <style>
+      a{
+         width: 60px; height: 30px; display: block; border: 1px solid #000433; background: red; border-radius: 10px;
+      }
+   </style>
+</head>
+<body>
+
+<script>
+   // Задача 1
+   const body = document.querySelector('body');
+   const element1 = document.createElement('div');
+   element1.textContent = 'Этот элемент создан при помощи DOM API';
+   body.appendChild(element1);
+
+   // Задача 2
+   const element2 = document.createElement('div');
+   element2.classList.add('inner');
+   element2.textContent = 'Этот элемент ТОЖЕ создан при помощи DOM API';
+   element1.appendChild(element2);
+
+   // Задача 3
+   element2.style.color = 'red';
+
+   // Задача 4
+   element1.addEventListener('click', function () {
+      console.log('Этот текст говорит о том, что я все сделал правильно')
+   });
+
+   // Задача 5
+   const href = document.createElement('a');
+   href.setAttribute('href', 'https://loftschool.com');
+   href.textContent = 'ссылка';
+   body.appendChild(href);
+   href.addEventListener('click', function (e) {
+       e.preventDefault();
+       console.log('Я кликнул на ссылку ' + href.getAttribute('href'));
+   });
+
+   // Задача 6
+   const button = document.createElement('button');
+   const input = document.createElement('input');
+   button.textContent = 'кнопка';
+   //input.setAttribute('name', 'input');
+   body.appendChild(button);
+   body.appendChild(input);
+   button.addEventListener('click', function () {
+       console.log(input.value);
+       input.value = '';
+   });
+
+</script>
+</body>
+</html>

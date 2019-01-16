@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Слайдер из задачи 9 с анимацией</title>
+   <style>
+      body {
+         font: 16px Helvetica, sans-serif;
+         margin: 0;
+         padding: 0;
+      }
+
+      a,
+      a:visited,
+      a:active,
+      a:focus {
+         color: #0091d9;
+         text-decoration: none;
+      }
+
+      a:hover,
+      a:active,
+      a:focus {
+         color: #ff6163;
+      }
+
+      .slider-container {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-top: 50px;
+      }
+
+      .arrow {
+         font-size: 30px;
+      }
+
+      .slider {
+         display: flex;
+         width: 300px;
+         overflow: hidden;
+         margin: 0 10px;
+      }
+
+      .items {
+         display: flex;
+         position: relative;
+         color: #444;
+         padding-left: 0; /* Добавил своё свойство*/
+         font-size: 30px;
+         will-change: right; /* Указываем свойтво, которое нужно изменять */
+         transition: right 0.3s;
+      }
+
+      .item {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: papayawhip;
+         box-sizing: border-box;
+         width: 100px;
+         height: 100px;
+         border: 1px solid #444;
+      }
+
+   </style>
+</head>
+<body>
+<div class="slider-container">
+   <a class="arrow" id="left" href="#">←</a>
+   <div class="slider">
+      <ul class="items" id="items">
+         <li class="item">1</li>
+         <li class="item">2</li>
+         <li class="item">3</li>
+         <li class="item">4</li>
+         <li class="item">5</li>
+         <li class="item">6</li>
+         <li class="item">7</li>
+         <li class="item">8</li>
+         <li class="item">9</li>
+      </ul>
+   </div>
+   <a class="arrow" id="right" href="#">→</a>
+</div>
+
+<script>
+    const left = document.querySelector("#left");
+    const right = document.querySelector("#right");
+    const items = document.querySelector("#items");
+    const allItem = document.querySelectorAll(".item"); // получаем все элементы списка
+    const item = document.querySelector(".item");
+    const comuted = getComputedStyle(item);
+
+    let step = parseInt(comuted.width);
+    console.log(step);
+    let maxRight = allItem.length * 100 - 300;
+    console.log(maxRight);
+
+    const minRight = 0; // Минмальное значение — значение right у первого элемента
+    //const maxRight = 600; // Максимальное значение — значение right у последнего элемента
+    // const step = 100; // Шаг изменения значения right при клике по стрелочке
+    let currentRight = 0; // Переменная начального положения элемента
+
+    items.style.right = currentRight; // Значение свойства right при загрузке страницы
+
+    right.addEventListener("click", function(e) {
+        e.preventDefault();
+        if (!currentRight) { // Прооверка вернулось ли число (может быть значение auto)
+            currentRight = 0;
+        }
+        if (currentRight < maxRight) { // Сравниваем текущее значение с максимальным
+            currentRight += step;  // Прибавляем шаг к текущему значеню
+            items.style.right = currentRight + "px";// Прибавляем к числу пиксели и присваиваем свойству right
+        } else {
+            currentRight = 0;
+            items.style.right = currentRight + "px";
+        }
+        console.log(currentRight);
+    });
+
+    left.addEventListener("click", function(e) {
+        e.preventDefault();
+        if (currentRight > minRight) {
+            currentRight -= step;
+            items.style.right = currentRight + "px";
+        } else {
+            currentRight = maxRight;
+            items.style.right = currentRight + "px";
+        }
+        console.log(currentRight);
+    });
+
+</script>
+</body>
+</html>

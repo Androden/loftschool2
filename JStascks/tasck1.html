@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Задачи по основам JavaScript#1</title>
+</head>
+<body>
+
+<script>
+   /*
+   Задача 1. Типы данных и переменные
+   */
+   var name = "Денис";
+   console.log(name);
+
+   var name = "Андреев";
+   console.log(name);
+
+   /*
+   Задача 2. Условный оператор if
+   */
+   if (2==2){
+       console.log("утверждение верно");
+   } else {
+       console.log("утверждение НЕ верно");
+   }
+
+   /*
+   Задача 3. Циклический оператор for
+   */
+   for (var i=0; i<3; i++){
+       console.log(i);
+   }
+
+   /*
+   Задача 4. Функции
+   */
+   function sum(p1, p2, p3){
+       return p1 + p2 + p3;
+
+   }
+   summa = sum(10,20,30);
+   console.log(summa);
+      // Переменные из функций не всплывают
+         var xx;
+         console.log(xx);
+
+         function lol () {
+           var  xx = 55;
+             return xx;
+         }
+
+   /*
+   Задача 5.1. Массивы и объекты
+   */
+   var mass = ['привет', 'loftschool'];
+   mass.push('я изучаю', 'javascript');
+   console.log(mass.length);
+   for (i=0; i<mass.length; i++){
+       console.log(mass[i]);
+   }
+
+   /*
+    Задача 5.2. Массивы и объекты
+    */
+   var mass2 = [32, 878, 323, 122, 32, 98, 49, 55, 43, 21];
+   for (i=0; i<mass2.length; i++){
+       if (mass2[i]>100){
+       console.log(mass2[i]);
+       }
+   }
+
+   /*
+    Задача 5.3. Массивы и объекты
+    */
+   var my = {name: 'Denis', lastName: 'Andreev', age: 30};
+   my.work = 'programmer';
+   for (var key in my){
+       console.log( "Ключ: " + key + " значение: " + my[key] );
+   }
+
+   /*
+    Задача 5.4. Массивы и объекты
+    */
+   function hello (human) {
+       console.log("Привет, меня зовут " + my.name + " " + my.lastName + " и мне " + my.age + " лет!");
+   }
+   var result = hello(my);
+
+   /*
+   Задача 6.1. Break
+   */
+   for(i=0; i<10; i++) {
+       if (i==5) break;
+   }
+   console.log(i);
+
+   /*
+  Задача 6.2. Switch
+  */
+   var a = 2 + 2;
+   switch (a) {
+       case 3: alert( 'Маловато' );
+           break;
+       case 4: console.log( 'В точку!' );
+           break;
+       case 5: console.log( 'Перебор' );
+           break;
+       default: console.log( 'Я таких значений не знаю' );
+   }
+   /*
+   Задача 6.3. While
+   */
+   var j = 0;
+   while (j < 3) {
+       console.log( j );
+       j++;
+   }
+   /*
+   Задача 6.3. Объекты в массиве.
+   */
+   var arr = [
+       {name: 'Denis', lastName: 'Andreev', age: 30},
+       {name: 'Vasilisa', lastName: 'Andreev', age: 30},
+       {name: 'Oleg', lastName: 'Andreev', age: 30}
+   ];
+   for (i=0; i<arr.length; i++){
+       console.log(arr[i].name);
+   }
+
+
+
+
+</script>
+</body>
+</html>

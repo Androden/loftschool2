@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Dom</title>
+</head>
+<body>
+   <div id="container">
+      <div class="hello">Привет, loftschool</div>
+      <a href="http://loftsсhool.com">Перейти на сайт</a>
+
+      <div class="surprise">У меня для тебя сюрприз</div>
+      <button id="but">Нажмите</button>
+      <input type="text" id="phone">
+
+      <form id="myForm">
+         <div>
+            Имя:<br>
+            <input type="text" name="name">
+         </div>
+         <div>
+            Фамилия:<br>
+            <input type="text" name="lastName">
+         </div>
+         <div>
+            Пол:<br>
+            <select name="gender">
+               <option value="m">М</option>
+               <option value="f">Ж</option>
+            </select>
+         </div>
+         <div>
+            <input type="checkbox" name="auto"> есть автомобиль
+         </div>
+         <br>
+         <button id="sendButton">Отправить</button>
+      </form>
+   </div>
+
+   <script>
+
+      // Изменение стиля элемента
+      const container = document.querySelector('#container');
+      container.style.color = '#f00';
+      container.style.fontSize = '30px';
+
+      const elem1 = document.querySelector('.hello');
+      elem1.textContent = 'это новый текст ! ';
+
+      //Создаем новый элемент
+      const elem2 = document.createElement('div');
+      elem2.textContent = ' текст внутри div';
+      const elem3 = document.createElement('span');
+      elem3.textContent = ' текст внутри span';
+      //document.body.appendChild(elem2);
+      container.appendChild(elem2);
+      container.appendChild(elem3);
+
+      //DOM-события
+      const myButton = document.querySelector('#but');
+      const surprise = document.querySelector('.surprise');
+      myButton.addEventListener('click', function () {
+         surprise.style.color='green';
+      });
+
+      // Обработка ввода
+      const phone = document.querySelector('#phone');
+      phone.addEventListener('keydown', function (e) {
+          let isDigit = false;
+          let isDash = false;
+          let isControls = false;
+          if(e.key >= 0 || e.key <= 9){
+              isDigit = true;
+          }
+          if(e.key == '-'){
+              isDash = true;
+          }
+          if(e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'Backspace'){
+              isControls = true;
+          }
+          if (!isDigit && !isDash && !isControls){
+              e.preventDefault();
+          }
+      });
+
+      // Работа с формами
+      const myForm = document.querySelector('#myForm');
+      const sendButton = document.querySelector('#sendButton');
+
+      sendButton.addEventListener('click', function (e) {
+         e.preventDefault();
+
+         console.log(myForm.elements.name.value);
+         console.log(myForm.elements.lastName.value);
+         if (myForm.elements.gender.value == 'm'){
+            console.log("Это мужик");
+         }else{
+             console.log("Это НЕ мужик");
+         }
+         if (myForm.elements.auto.checked == true){
+            console.log("Он имеет тачилу");
+         }
+      });
+   </script>
+</body>
+</html>

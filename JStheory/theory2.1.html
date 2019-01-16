@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Добабление и удаление элементов из списка</title>
+
+   <style>
+      body{
+         font: 16px Helvetica, sans-serif;
+         color: #444444;
+      }
+      .item{
+         margin: 5px 0;
+      }
+      .item button{
+         margin-left: 5px;
+      }
+   </style>
+</head>
+<body>
+   <input type="text" id="nameInput">
+   <button id="myButton">Добавить в список</button>
+
+   <ul id="list"></ul>
+
+   <script>
+      const myButton = document.querySelector('#myButton');
+      const inputName = document.querySelector('#nameInput');
+      const list = document.querySelector('#list');
+      
+      myButton.addEventListener('click', function () {
+          const newItem = document.createElement('li');
+          newItem.classList.add('item');
+          newItem.textContent = inputName.value;
+
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'удалить';
+
+          deleteButton.addEventListener('click', function () {
+             list.removeChild(newItem);// Удаляет текущий элемент
+          });
+
+          newItem.appendChild(deleteButton);
+          list.appendChild(newItem);
+
+          inputName.value = ''; // Очищает текстовое поле после добавление элемента
+      });
+   </script>
+</body>
+</html>

@@ -65,4 +65,14 @@ a {
 a:hover {
   background-color: #0c7cd5; }
 
+/*Циклы*/
+.class {
+  content: vk; }
+
+.class {
+  content: fb; }
+
+.class {
+  content: tw; }
+
 /*# sourceMappingURL=testSCSS.css.map */

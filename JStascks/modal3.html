@@ -63,7 +63,7 @@
 </script>
 
 <script>
-    const openButton = document.querySelector(".openOverlay");
+    const openButton = document.querySelector(".openOverlay"); // Находим кнопку
     const template = document.querySelector("#overlayTemplate").innerHTML; // Создаем переменную, куда добавляем разметку из шаблона
     const overlay = createOverlay(template);  // Вызываем функцию
 
@@ -73,34 +73,36 @@
     });
 
     function createOverlay(template) {
-        let fragment = document.createElement('div'); // Создаем элемент
+        let fragment = document.createElement('div'); // Создаем временный див для поиска в нем элементов
+        // Это особенность работы с DOM-деревом — нам всегда необходим какой-то начальный контейнер для работы, относительно которого будет происходить поиск
 
-        fragment.innerHTML = template; // Добавляем элементу разметку из шаблона
+        fragment.innerHTML = template; // Помещаем во временный див шаблон
+        // Вся разметка приходит в виде текста, поэтому её необходимо преобразовывать в элементы DOM-дерева
 
         const overlayElement = fragment.querySelector(".overlay");
         const contentElement = fragment.querySelector(".content");
         const closeElement = fragment.querySelector(".close");
 
-        fragment = null;
+        fragment = null; // Обнуляем временный див, так он уже не нужен
 
         overlayElement.addEventListener("click", e => {
-            if (e.target === overlayElement) {
-                closeElement.click();
+            if (e.target === overlayElement) { // проверяет область на которую произведен клик. В данном случае это весь оверлей, кроме его контента.
+                closeElement.click(); // Эмулирует закрыти окна
             }
         });
         closeElement.addEventListener("click", () => {
-            document.body.removeChild(overlayElement);
+            document.body.removeChild(overlayElement);// Удаляет элемент из DOM-дерева
         });
 
         return {
             open() {
-                document.body.appendChild(overlayElement);
+                document.body.appendChild(overlayElement); // Добаляет элемент в DOM-дерево
             },
             close() {
-                closeElement.click();
+                closeElement.click(); // Эмулирует нажатие на close
             },
             setContent(content) {
-                contentElement.innerHTML = content;
+                contentElement.innerHTML = content; // Заменяет (подставляет) содержимое
             }
         };
     }
